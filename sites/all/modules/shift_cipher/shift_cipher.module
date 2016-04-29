@@ -54,3 +54,9 @@
         $_SESSION['shift_cipher_output'] = $output;
         $form_state['redirect'] = 'encrypted_results';
     }
+
+    function encrypted_results_display() {
+        $results = $_SESSION['shift_cipher_output'];
+
+        return "<p> $results </p>";
+    }
