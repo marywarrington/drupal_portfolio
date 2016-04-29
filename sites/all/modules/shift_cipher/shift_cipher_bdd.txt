@@ -3,10 +3,10 @@
 3. SUBMIT form function to redirect to success page 🐳
     - pass information to SUCCESS FUNCTION 🌻
 4. MENU CALLBACK to create success page 💫
-5. SUCCESS FUNCTION prints results on success page
+5. SUCCESS FUNCTION prints results on success page 💥
 
 LOGIC:
-1. return single word
+1. return single word 🎃
 2. return single letter shifted 1
 3. return single letter shifted any amount
 4. return two letters shifted

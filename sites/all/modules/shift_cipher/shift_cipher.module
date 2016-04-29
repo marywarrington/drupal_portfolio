@@ -51,7 +51,17 @@
         $direction = $form_state['values']['direction'];
         $phrase = $form_state['values']['phrase'];
 
-        $_SESSION['shift_cipher_output'] = $phrase;
+        $ascii = ord($phrase);
+
+        if ($direction == 'left') {
+            $shifted_ascii = $ascii + $shift_value;
+        } else if ($direction == 'right') {
+            $shifted_ascii = $ascii - $shift_value;
+        }
+
+        $output = chr($shifted_ascii);
+
+        $_SESSION['shift_cipher_output'] = $output;
         $form_state['redirect'] = 'encrypted_results';
     }
 
@@ -60,3 +70,7 @@
 
         return "<p> $results </p>";
     }
+
+
+// 97 = a
+// 122 = z
