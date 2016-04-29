@@ -84,6 +84,12 @@
                     } else if ($direction == 'right') {
                         $shifted_ascii = $ascii + $shift_value;
                     }
+                    if ($shifted_ascii > 122) {
+                        $shifted_ascii = $shifted_ascii - 26;
+                    }
+                    if ($shifted_ascii < 97) {
+                        $shifted_ascii = $shifted_ascii + 26;
+                    }
                     //convert back to a letter
                     $converted_letter = chr($shifted_ascii);
                     //push letter into an array of letters

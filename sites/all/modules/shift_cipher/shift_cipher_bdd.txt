@@ -12,4 +12,4 @@ LOGIC:
 4. return two letters shifted 🍍
 5. return any word shifted any amount 🌶
  - handle end/beginning of alphabet
-6. add validation
+6. add validation 🍕
