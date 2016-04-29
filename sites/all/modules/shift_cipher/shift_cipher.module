@@ -74,18 +74,24 @@
             // letters is an array of individual letters from the word
             $letters = str_split($word);
             foreach ($letters as $letter) {
-                //turn the letter into an ascii value
-                $ascii = ord($letter);
-                //add or subtract the shift value
-                if ($direction == 'left') {
-                    $shifted_ascii = $ascii - $shift_value;
-                } else if ($direction == 'right') {
-                    $shifted_ascii = $ascii + $shift_value;
+                //if the letter is alphanumeric
+                if (ctype_alnum($letter)) {
+                    //turn the letter into an ascii value
+                    $ascii = ord($letter);
+                    //add or subtract the shift value
+                    if ($direction == 'left') {
+                        $shifted_ascii = $ascii - $shift_value;
+                    } else if ($direction == 'right') {
+                        $shifted_ascii = $ascii + $shift_value;
+                    }
+                    //convert back to a letter
+                    $converted_letter = chr($shifted_ascii);
+                    //push letter into an array of letters
+                    array_push($shifted_letters, $converted_letter);
+                } else {
+                    //to push punctuation
+                    array_push($shifted_letters, $letter);
                 }
-                //convert back to a letter
-                $converted_letter = chr($shifted_ascii);
-                //push letter into an array of letters
-                array_push($shifted_letters, $converted_letter);
             }
             //implode the array of letters to be the shifted word
             $shifted_word = implode($shifted_letters);
