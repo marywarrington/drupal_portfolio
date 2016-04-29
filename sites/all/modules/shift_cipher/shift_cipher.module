@@ -1,0 +1,13 @@
+<?php
+
+    function shift_cipher_menu() {
+        $items = array();
+        $items['shift_cipher'] = array(
+            'title' => 'Shift Cipher',
+            'type' => MENU_NORMAL_ITEM,
+            'access callback' => TRUE,
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('shift_cipher_form'),
+        );
+        return $items;
+    }
