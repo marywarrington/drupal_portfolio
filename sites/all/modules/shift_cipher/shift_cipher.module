@@ -48,18 +48,36 @@
 
     function shift_cipher_form_submit($form, &$form_state) {
         $shift_value = $form_state['values']['shift_value'];
-        $direction = $form_state['values']['direction'];
-        $phrase = $form_state['values']['phrase'];
+        $direction = strtolower($form_state['values']['direction']);
+        $phrase = strtolower($form_state['values']['phrase']);
+        $words = explode(" ", $phrase);
+        $shifted_words = array();
 
-        $ascii = ord($phrase);
-
-        if ($direction == 'left') {
-            $shifted_ascii = $ascii + $shift_value;
-        } else if ($direction == 'right') {
-            $shifted_ascii = $ascii - $shift_value;
+        // words is an array of each individual word from the phrase
+        foreach ($words as $word) {
+            $shifted_letters = array();
+            // letters is an array of individual letters from the word
+            $letters = str_split($word);
+            foreach ($letters as $letter) {
+                //turn the letter into an ascii value
+                $ascii = ord($letter);
+                //add or subtract the shift value
+                if ($direction == 'left') {
+                    $shifted_ascii = $ascii - $shift_value;
+                } else if ($direction == 'right') {
+                    $shifted_ascii = $ascii + $shift_value;
+                }
+                //convert back to a letter
+                $converted_letter = chr($shifted_ascii);
+                //push letter into an array of letters
+                array_push($shifted_letters, $converted_letter);
+            }
+            //implode the array of letters to be the shifted word
+            $shifted_word = implode($shifted_letters);
+            //push the word into an array of words
+            array_push($shifted_words, $shifted_word);
         }
-
-        $output = chr($shifted_ascii);
+        $output = implode(" ", $shifted_words);
 
         $_SESSION['shift_cipher_output'] = $output;
         $form_state['redirect'] = 'encrypted_results';
