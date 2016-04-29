@@ -1,0 +1,5 @@
+name = Portfolio Module
+description = Consolidation of modules for portfolio
+package = Portfolio Modules
+core = 7.x
+files[] = portfolio_modules.module

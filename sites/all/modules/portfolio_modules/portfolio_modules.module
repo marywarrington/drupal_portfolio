@@ -1,0 +1,650 @@
+<?php
+
+function portfolio_modules_menu(){
+    $items = array();
+
+    // QUEEN ATTACK MENU
+    $items['queen_attack'] = array(
+        'title' => 'Queen Attack',
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('queen_attack_form'),
+    );
+    $items['queen_success'] = array(
+        'title' => "Queen Attack Results",
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'queen_attack_success',
+    );
+
+    // TITLE CASE MENU
+
+    $items['title_case'] = array(
+        'title' => 'Title Case',
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('title_case_form'),
+    );
+    $items['title_success'] = array(
+        'title' => 'Title Case Success',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'title_case_success',
+    );
+
+    // PING PONG MENU
+
+    $items['ping_pong'] = array(
+        'title' => 'Ping Pong',
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('ping_pong_form'),
+    );
+
+    $items['pp_success'] = array(
+        'title' => 'Ping Ponged!',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'ping_pong_success',
+    );
+
+    // SUM MENU
+
+    $items['sum'] = array(
+        'title' => 'Calculate sum',
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('sum_form'),
+    );
+
+    $items['success'] = array(
+        'title' => 'Success',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'sum_success',
+    );
+
+    // GREETING MENU
+
+    $items['user_hello_friend'] = array(
+        'title' => "Hello Friend!",
+        'page callback' => 'say_hello_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+    $items['user_goodbye'] = array(
+        'title' => 'Goodbye Friend!',
+        'page callback' => 'say_goodbye_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+    $items['administrator_hello_friend'] = array(
+        'title' => 'Hello Admin!',
+        'page callback' => 'say_hello_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+    $items['administrator_goodbye'] = array(
+        'title' => 'Goodbye Admin!',
+        'page callback' => 'say_goodbye_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+    $items['moderator_hello_friend'] = array(
+        'title' => 'Hello Moderator!',
+        'page callback' => 'say_hello_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+    $items['moderator_goodbye'] = array(
+        'title' => 'Goodbye Moderator!',
+        'page callback' => 'say_goodbye_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+    $items['VIP_hello_friend'] = array(
+        'title' => 'Hello VIP!',
+        'page callback' => 'say_hello_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+    $items['VIP_goodbye'] = array(
+        'title' => 'Goodbye VIP!',
+        'page callback' => 'say_goodbye_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+      );
+
+    //   CLOCK ANGLE
+
+    $items['clock_angle'] = array(
+        'title' => 'Clock Angle',
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('clock_angle_form'),
+
+    );
+    $items['clock_success'] = array(
+        'title' => 'Clock Angle Results',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'clock_angle_success',
+    );
+
+    // RPS GAME
+
+    $items['rps_game'] = array(
+        'title' => 'Rock Paper Scissors',
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('rps_player_1_form')
+    );
+    $items['player_2_form'] = array(
+        'title' => 'Rock Paper Scissors',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('rps_player_2_form')
+    );
+    $items['rps_results'] = array(
+        'title' => 'Rock Paper Scissors Results',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'rps_final_results',
+    );
+
+    // TRIANGLE TRACKER MENU
+
+    $items['triangle_tracker'] = array(
+        'title' => "Triangle Tracker",
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('triangle_tracker_form'),
+    );
+    $items['triangle_success'] = array(
+        'title' => "Triangle Tracker Results",
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'triangle_success',
+    );
+
+    return $items;
+}
+
+    // QUEEN ATTACK FUNCTIONS
+
+    function queen_attack_form() {
+        $form = array();
+        $form['queen_input_x'] = array(
+            '#title' => 'Queen X',
+            '#type' => 'textfield',
+            '#description' => t('Queen X Coordinate'),
+            '#element_validate' => array('element_validate_integer_positive', 'element_validate_chess_range'),
+            '#required' => TRUE,
+        );
+        $form['queen_input_y'] = array(
+            '#title' => 'Queen Y',
+            '#type' => 'textfield',
+            '#description' => t('Queen Y Coordinate'),
+            '#element_validate' => array('element_validate_integer_positive', 'element_validate_chess_range'),
+            '#required' => TRUE,
+        );
+        $form['piece_input_x'] = array(
+            '#title' => 'Piece X',
+            '#type' => 'textfield',
+            '#description' => t('Piece X Coordinate'),
+            '#element_validate' => array('element_validate_integer_positive', 'element_validate_chess_range'),
+            '#required' => TRUE,
+        );
+        $form['piece_input_y'] = array(
+            '#title' => 'Piece Y',
+            '#type' => 'textfield',
+            '#description' => t('Piece Y Coordinate'),
+            '#element_validate' => array('element_validate_integer_positive', 'element_validate_chess_range'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'ATTACK!',
+        );
+        return $form;
+    }
+
+    function element_validate_chess_range($element) {
+        if ($element['#value'] > 8) {
+            form_error($element, t('Numbers must be between 1 and 8!'));
+        }
+    }
+
+    function queen_attack_form_validate($form, &$form_state) {
+        if ($form_state['values']['queen_input_x'] == $form_state['values']['piece_input_x'] && $form_state['values']['queen_input_y'] == $form_state['values']['piece_input_y']) {
+            form_set_error('queen_input_x', 'Pieces cannot share a space!');
+        }
+    }
+
+    function queen_attack_form_submit($form, &$form_state) {
+        $queen_x = $form_state['values']['queen_input_x'];
+        $queen_y = $form_state['values']['queen_input_y'];
+        $piece_x = $form_state['values']['piece_input_x'];
+        $piece_y = $form_state['values']['piece_input_y'];
+
+        if ($queen_x === $piece_x || $queen_y === $piece_y) {
+            $can_attack = TRUE;
+        } else if (abs($queen_x - $piece_x) === abs($queen_y - $piece_y)) {
+            $can_attack = TRUE;
+        } else $can_attack = FALSE;
+
+        $_SESSION['queen_attack_output'] = $can_attack;
+        $form_state['redirect'] = 'queen_success';
+    }
+
+    function queen_attack_success() {
+        $results = $_SESSION['queen_attack_output'];
+        if ($results) {
+            return "QUEEN CAN ATTACK!";
+        } else {
+            return "Queen cannot attack.";
+        }
+    }
+
+
+    // TITLE CASE FUNCTIONS
+
+    function title_case_form() {
+        $form = array();
+        $form['input'] = array(
+            '#title' => 'Input',
+            '#type' => 'textfield',
+            '#description' => t('Please enter your sentence to be converted to title case!'),
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Convert!'
+        );
+        return $form;
+    }
+
+    function title_case_form_submit($form, &$form_state) {
+        $input_string = $form_state['values']['input'];
+        $exploded_string = explode(" ", $input_string);
+
+        $result =  array();
+        foreach($exploded_string as $word) {
+            $new_word = ucfirst($word);
+            array_push($result, $new_word);
+        }
+
+        $result = implode(" ", $result);
+
+        $_SESSION['title_case_output'] = $result;
+        $form_state['redirect'] = 'title_success';
+    }
+
+    function title_case_success() {
+        $results = $_SESSION['title_case_output'];
+        return $results;
+    }
+
+    // PING PONG FUNCTIONS
+
+    function ping_pong_form() {
+        $form = array();
+        $form['input_number'] = array(
+            '#title' => 'Number to Ping Pong',
+            '#type' => 'textfield',
+            '#description' => t('Please enter a number to count up to'),
+            '#element_validate' => array('element_validate_integer_positive'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Ping Pong',
+        );
+        return $form;
+    }
+
+    function ping_pong_form_submit($form, &$form_state) {
+        $input_number =  $form_state['values']['input_number'];
+
+        $results = array();
+        $i = 1;
+        for ($i = 1; $i <= $input_number; $i++) {
+            if ($i % 15 === 0) {
+                array_push($results,'ping pong');
+            } else if ($i % 5 === 0) {
+                array_push($results,'pong');
+            } else if ($i % 3 === 0) {
+                array_push($results,'ping');
+            } else {
+                array_push($results, $i);
+            }
+        }
+
+        $_SESSION['ping_pong_output'] = $results;
+        $form_state['redirect'] = 'pp_success';
+    }
+
+    function ping_pong_success() {
+        $results = $_SESSION['ping_pong_output'];
+        $output = "";
+        foreach ($results as $result) {
+            $output .= ("<p>" . $result . "</p>");
+        }
+        return $output;
+    }
+
+
+    // SUM FUNCTIONS
+
+    function sum_form()
+    {
+        $form = array();
+        $form['left_number'] = array(
+            '#title' => 'Left Number',
+            '#type' => 'textfield',
+            '#description' => t('Please enter your starting number.'),
+            '#element_validate' => array('element_validate_number', 'element_validate_range', 'element_validate_even'),
+            '#required' => TRUE,
+        );
+
+        $form['right_number'] = array(
+            '#title' => 'Right Number',
+            '#type' => 'textfield',
+            '#description' => t('Please enter a number to add to the starting number.'),
+            '#element_validate' => array('element_validate_number', 'element_validate_range', 'element_validate_even'),
+            '#required' => TRUE,
+        );
+
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Calculate Sum',
+        );
+
+        return $form;
+    }
+
+    function sum_form_submit($form, &$form_state)
+    {
+        $first_number = $form_state['values']['left_number'];
+        $second_number = $form_state['values']['right_number'];
+        $sum = $first_number + $second_number;
+        $_SESSION['sum_output'] = $sum;
+        $form_state['redirect'] = 'success';
+    }
+
+    function sum_success()
+    {
+        $answer = $_SESSION['sum_output'];
+        return "You calculated a sum! The answer is $answer";
+    }
+
+    function element_validate_range($element) {
+        if ($element['#value'] > 50 || $element['#value'] < -50) {
+            form_error($element, t('Numbers must be less than 50 or greater than -50.'));
+        }
+    }
+
+    function element_validate_even($element) {
+        if ($element['#value'] % 2 != 0) {
+            form_error($element, t('Numbers must be even!'));
+        }
+    }
+
+
+    // GREETING FUNCTIONS
+
+    function say_hello_user() {
+        return'<p>Nice to see you!</p>';
+    }
+
+    function say_goodbye_user() {
+        return '<p>Come back soon!</p>';
+    }
+
+    function portfolio_modules_user_login(&$edit, $account) {
+        if (in_array('administrator', $account->roles)) {
+            $_GET['destination'] = 'administrator_hello_friend';
+        }  else if (in_array('moderator', $account->roles)) {
+            $_GET['destination'] = 'moderator_hello_friend';
+        }  else if (in_array('VIP', $account->roles)) {
+            $_GET['destination'] = 'VIP_hello_friend';
+        }  else {
+            $_GET['destination'] = 'user_hello_friend';
+        }
+    }
+
+    function portfolio_modules_user_logout($account) {
+        if (in_array('administrator', $account->roles)) {
+            $_GET['destination'] = 'administrator_goodbye';
+        }  else if (in_array('moderator', $account->roles)) {
+            $_GET['destination'] = 'moderator_goodbye';
+        }  else if (in_array('VIP', $account->roles)) {
+            $_GET['destination'] = 'VIP_goodbye';
+        }  else {
+            $_GET['destination'] = 'user_goodbye';
+        }
+    }
+
+    // COMMENT BUDDY FUNCTIONS
+
+    function portfolio_modules_comment_insert() {
+        drupal_set_message("Thank you!");
+    }
+
+    function portfolio_modules_comment_update() {
+        drupal_set_message("Your comment has been changed.");
+    }
+
+    function portfolio_modules_comment_delete() {
+        drupal_set_message("Your comment has been DELETED.  Guess you regretted it, huh?");
+    }
+
+    // CLOCK ANGLE FUNCTIONS
+
+    function clock_angle_form() {
+        $form = array();
+        $form['hour_input'] = array(
+            '#title' => 'Hour Input',
+            '#type' => 'textfield',
+            '#description' => t('Put in an hour input.'),
+            '#element_validate' => array('element_validate_integer_positive','element_validate_clock_hour'),
+            '#required' => TRUE,
+        );
+        $form['minute_input'] = array(
+            '#title' => 'Minute Input',
+            '#type' => 'textfield',
+            '#description' => t('Put in a minute input.'),
+            '#element_validate' => array('element_validate_integer_positive','element_validate_clock_minute'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Find the Angle',
+        );
+        return $form;
+    }
+
+    function element_validate_clock_minute($element) {
+        if ($element['#value'] > 59 || $element['#value'] < 0) {
+            form_error($element, t('Please choose a minute value between 0 and 59!'));
+        }
+    }
+
+    function element_validate_clock_hour($element) {
+        if ($element['#value'] > 12 || $element['#value'] < 1) {
+            form_error($element, t('Please choose an hour value between 1 and 12!'));
+        }
+    }
+
+    function clock_angle_form_submit($form, &$form_state) {
+        $hour_input = $form_state['values']['hour_input'];
+        $minute_input = $form_state['values']['minute_input'];
+
+        $hour_angle = ($hour_input + ($minute_input / 60)) * 30;
+        $minute_angle = $minute_input * 6;
+        $angle_difference = abs($hour_angle - $minute_angle);
+
+        if ($angle_difference > 180) {
+            $angle_difference = 360 - $angle_difference;
+        }
+
+        $_SESSION['clock_angle_output'] = $angle_difference;
+        $form_state['redirect'] = 'clock_success';
+    }
+
+    function clock_angle_success() {
+        $results = $_SESSION['clock_angle_output'];
+        return "Your answer is " . $results . " degrees!";
+    }
+
+    // RPS GAME FUNCTIONS
+
+    function rps_player_1_form() {
+        $form = array();
+        $form['player_1_input'] = array(
+            '#title' => 'Player 1 Choice',
+            '#type' => 'textfield',
+            '#description' => t('Please choose either rock, paper, or scissors.'),
+            '#element_validate' => array('element_validate_rps'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Submit',
+        );
+        return $form;
+    }
+
+    function rps_player_1_form_submit($form, &$form_state) {
+        $player_1_throw = $form_state['values']['player_1_input'];
+
+        $_SESSION['player_1_output'] = $player_1_throw;
+        $form_state['redirect'] = 'player_2_form';
+    }
+
+    function rps_player_2_form() {
+        $form = array();
+        $form['player_2_input'] = array(
+            '#title' => 'Player 2 Choice',
+            '#type' => 'textfield',
+            '#description' => t('Please choose either rock, paper, or scissors.'),
+            '#element_validate' => array('element_validate_rps'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Submit',
+        );
+        return $form;
+    }
+
+    function rps_player_2_form_submit($form, &$form_state) {
+        $player_1_throw = strtolower($_SESSION['player_1_output']);
+        $player_2_throw = strtolower($form_state['values']['player_2_input']);
+        if ($player_1_throw === 'scissors') {
+            if ($player_2_throw === 'paper') {
+                $results = "Player 1 Wins <br> <img src='http://baap.graphics/wp-content/uploads/2015/01/Cover3.jpg'>";
+            } else if ($player_2_throw === 'rock') {
+                $results = "Player 2 Wins! <br> <img src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQP_YCgdqkPZwV9WoEbPbhwsLEW96SoXCKSvTp1F359ZDk2Yr2f'>";
+            } else $results = "TIE! PLAY AGAIN! <br> <img src='http://www.teampedia.net/wiki/images/0/0b/Rock.png'>";
+        } else if ($player_1_throw === 'paper') {
+            if ($player_2_throw === 'rock') {
+                $results = "Player 1 Wins! <br> <img src='http://baap.graphics/wp-content/uploads/2015/01/Cover3.jpg'>";
+            } else if ($player_2_throw === 'scissors') {
+                $results = "Player 2 Wins! <br> <img src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQP_YCgdqkPZwV9WoEbPbhwsLEW96SoXCKSvTp1F359ZDk2Yr2f'>";
+            } else $results = "TIE! PLAY AGAIN! <br> <img src='http://www.teampedia.net/wiki/images/0/0b/Rock.png'>";
+        } else if ($player_1_throw === 'rock') {
+            if ($player_2_throw === 'scissors') {
+                $results = "Player 1 Wins! <br> <img src='http://baap.graphics/wp-content/uploads/2015/01/Cover3.jpg'>";
+            } else if ($player_2_throw === 'paper') {
+                $results = "Player 2 Wins! <br> <img src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQP_YCgdqkPZwV9WoEbPbhwsLEW96SoXCKSvTp1F359ZDk2Yr2f'>";
+            } else $results = "TIE! PLAY AGAIN! <br> <img src='http://www.teampedia.net/wiki/images/0/0b/Rock.png'>";
+        }
+        $_SESSION['rps_game_results'] = $results;
+        $form_state['redirect'] = 'rps_results';
+    }
+
+    function element_validate_rps($element) {
+        if ((strtolower($element['#value']) != 'rock') && (strtolower($element['#value']) != 'paper') && (strtolower($element['#value']) != 'scissors')) {
+            form_error($element, t('Please enter rock, paper, or scissors!'));
+        }
+    }
+
+    function rps_final_results() {
+        $results = $_SESSION['rps_game_results'];
+        return $results;
+    }
+
+    // TRIANGLE TRACKER FUNCTIONS
+
+    function triangle_tracker_form() {
+        $form = array();
+        $form['triangle_side_1'] = array(
+            '#title' => 'Side 1',
+            '#type' => 'textfield',
+            '#description' => t('Side 1 Length'),
+            '#element_validate' => array('element_validate_integer_positive'),
+            '#required' => TRUE,
+        );
+        $form['triangle_side_2'] = array(
+            '#title' => 'Side 2',
+            '#type' => 'textfield',
+            '#description' => t('Side 2 Length'),
+            '#element_validate' => array('element_validate_integer_positive'),
+            '#required' => TRUE,
+        );
+        $form['triangle_side_3'] = array(
+            '#title' => 'Side 3',
+            '#type' => 'textfield',
+            '#description' => t('Side 3 Length'),
+            '#element_validate' => array('element_validate_integer_positive'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Submit',
+        );
+        return $form;
+    }
+
+    function triangle_tracker_form_validate($form, &$form_state) {
+        if (($form_state['values']['triangle_side_1'] + $form_state['values']['triangle_side_2'] <= $form_state['values']['triangle_side_3']) || ($form_state['values']['triangle_side_1'] + $form_state['values']['triangle_side_3'] <= $form_state['values']['triangle_side_2']) || ($form_state['values']['triangle_side_2'] + $form_state['values']['triangle_side_3'] <= $form_state['values']['triangle_side_1'])) {
+            form_set_error('triangle_side_1', 'Those lengths do not make a triangle! Try again!');
+        }
+    }
+    function triangle_tracker_form_submit($form, &$form_state) {
+        $side_1 = $form_state['values']['triangle_side_1'];
+        $side_2 = $form_state['values']['triangle_side_2'];
+        $side_3 = $form_state['values']['triangle_side_3'];
+
+        if ($side_1 == $side_2 && $side_2 == $side_3) {
+            $results = "equilateral";
+        }
+        if (($side_1 == $side_2 && $side_1 != $side_3) || ($side_1 == $side_3 && $side_2 != $side_3) || ($side_3 == $side_2 && $side_1 != $side_3)) {
+            $results = "isosceles";
+        }
+        if ($side_1 != $side_2 && $side_1 != $side_3 && $side_2 != $side_3) {
+            $results = "scalene";
+        }
+
+        $_SESSION['triangle_tracker_output'] = $results;
+        $form_state['redirect'] = 'triangle_success';
+    }
+
+    function triangle_success() {
+        $results = $_SESSION['triangle_tracker_output'];
+        if ($results == "equilateral") {
+            return "You made an equilateral triangle!";
+        } else if ($results == "isosceles") {
+            return "You made an isosceles triangle!";
+        } else if ($results == "scalene") {
+            return "You made a scalene triangle!";
+        }
+    }
