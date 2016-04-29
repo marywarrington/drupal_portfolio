@@ -31,6 +31,7 @@
             '#title' => 'Direction',
             '#type' => 'textfield',
             '#description' => t("Enter 'left' or 'right' depending on which way you want to shift!"),
+            '#element_validate' => array('element_validate_direction'),
             '#required' => TRUE,
         );
         $form['phrase'] = array(
@@ -44,6 +45,12 @@
             '#value' => 'Encrypt!',
         );
         return $form;
+    }
+
+    function element_validate_direction($element) {
+        if (strtolower($element['#value']) != 'left' && strtolower($element['#value']) != 'right' ) {
+            form_error($element, t("Please enter either 'left' or 'right'!"));
+        }
     }
 
     function shift_cipher_form_submit($form, &$form_state) {

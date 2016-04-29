@@ -9,7 +9,7 @@ LOGIC:
 1. return single word 🎃
 2. return single letter shifted 1 🔥
 3. return single letter shifted any amount ⭐️
-4. return two letters shifted
-5. return any word shifted any amount
+4. return two letters shifted 🍍
+5. return any word shifted any amount 🌶
  - handle end/beginning of alphabet
 6. add validation
