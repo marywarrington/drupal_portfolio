@@ -51,7 +51,7 @@
         $direction = $form_state['values']['direction'];
         $phrase = $form_state['values']['phrase'];
 
-        $_SESSION['shift_cipher_output'] = $output;
+        $_SESSION['shift_cipher_output'] = $phrase;
         $form_state['redirect'] = 'encrypted_results';
     }
 
