@@ -38,6 +38,7 @@
             '#title' => 'Phrase to Shift',
             '#type' => 'textfield',
             '#description' => t('Enter the phrase you want encrypted.'),
+            '#element_validate' => array('element_validate_special_characters'),
             '#required' => TRUE,
         );
         $form['submit'] = array(
@@ -50,6 +51,13 @@
     function element_validate_direction($element) {
         if (strtolower($element['#value']) != 'left' && strtolower($element['#value']) != 'right' ) {
             form_error($element, t("Please enter either 'left' or 'right'!"));
+        }
+    }
+
+    function element_validate_special_characters($element) {
+        $special_character_list = '\'^£$%&*()}{@#~><>|=_+¬\-\[\]';
+        if(preg_match('/[' . $special_character_list . ']/', $element['#value']) !== 0) {
+            form_error($element, t("Please only use normal punctuation!"));
         }
     }
 
