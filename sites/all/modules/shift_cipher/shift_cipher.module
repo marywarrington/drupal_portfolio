@@ -39,3 +39,12 @@
         );
         return $form;
     }
+
+    function shift_cipher_form_submit($form, &$form_state) {
+        $shift_value = $form_state['values']['shift_value'];
+        $direction = $form_state['values']['direction'];
+        $phrase = $form_state['values']['phrase'];
+
+        $_SESSION['shift_cipher_output'] = $output;
+        $form_state['redirect'] = 'encrypted_results';
+    }
