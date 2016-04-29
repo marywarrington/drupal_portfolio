@@ -9,6 +9,12 @@
             'page callback' => 'drupal_get_form',
             'page arguments' => array('shift_cipher_form'),
         );
+        $items['encrypted_results'] = array(
+            'title' => "Encrypted Results",
+            'type' => MENU_CALLBACK,
+            'access callback' => TRUE,
+            'page callback' => 'encrypted_results_display',
+        );
         return $items;
     }
 
