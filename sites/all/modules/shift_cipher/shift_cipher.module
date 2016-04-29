@@ -55,7 +55,7 @@
     }
 
     function element_validate_special_characters($element) {
-        $special_character_list = '\'^£$%&*()}{@#~><>|=_+¬\-\[\]';
+        $special_character_list = '\^£$%&*()}{@#~><>|=_+¬\-\[\]';
         if(preg_match('/[' . $special_character_list . ']/', $element['#value']) !== 0) {
             form_error($element, t("Please only use normal punctuation!"));
         }
