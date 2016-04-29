@@ -1,0 +1,5 @@
+name = Shift Cipher
+description = A module to encrypt messages using Shift Cipher
+package = Portfolio Modules
+core = 7.x
+files[] = shift_cipher.module

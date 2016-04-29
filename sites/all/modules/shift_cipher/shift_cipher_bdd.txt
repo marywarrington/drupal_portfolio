@@ -1,0 +1,14 @@
+1. Make menu item for shift cipher page
+2. Make FORM on shift cipher page
+3. SUBMIT form function to redirect to success page
+    - pass information to SUCCESS FUNCTION
+4. MENU CALLBACK to create success page
+5. SUCCESS FUNCTION prints results on success page
+
+LOGIC:
+1. return single word
+2. return single letter shifted 1
+3. return single letter shifted any amount
+4. return two letters shifted
+5. return any word shifted any amount
+6. add validation
