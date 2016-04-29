@@ -112,10 +112,5 @@
 
     function encrypted_results_display() {
         $results = $_SESSION['shift_cipher_output'];
-
         return "<p> $results </p>";
     }
-
-
-// 97 = a
-// 122 = z
