@@ -11,3 +11,31 @@
         );
         return $items;
     }
+
+    function shift_cipher_form() {
+        $form = array();
+        $form['shift_value'] = array(
+            '#title' => 'Shift Value',
+            '#type' => 'textfield',
+            '#description' => t('Enter an inteeger for the number of spaces to shift each letter'),
+            '#element_validate' => array('element_validate_integer_positive'),
+            '#required' => TRUE,
+        );
+        $form['direction'] = array(
+            '#title' => 'Direction',
+            '#type' => 'textfield',
+            '#description' => t("Enter 'left' or 'right' depending on which way you want to shift!"),
+            '#required' => TRUE,
+        );
+        $form['phrase'] = array(
+            '#title' => 'Phrase to Shift',
+            '#type' => 'textfield',
+            '#description' => t('Enter the phrase you want encrypted.'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Encrypt!',
+        );
+        return $form;
+    }
