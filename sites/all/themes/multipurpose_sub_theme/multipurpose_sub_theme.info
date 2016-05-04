@@ -1,0 +1,24 @@
+name = Multipurpose Sub Theme
+description = my subtheme of Zymphonies
+core = 7.x
+base theme = multipurpose_zymphonies_theme
+stylesheets[all][] = style.css
+stylesheets[all][] = my_zymphonies.css
+
+regions[search]      	 = Search
+regions[user_menu]  	 = User menu
+regions[slideshow]       = Slideshow
+regions[front_welcome]   = Front Welcome
+regions[top_first]       = First top
+regions[top_second]      = Second top
+regions[top_third]       = Third top
+regions[sidebar_first]   = First Sidebar
+regions[sidebar_second]  = Second Sidebar
+regions[content]         = Content
+regions[bottom_widget_1] = Bottom widget 1
+regions[bottom_widget_2] = Bottom widget 2
+regions[bottom_widget_3] = Bottom widget 3
+regions[footer_first]    = First Bottom
+regions[footer_second]   = Second Bottom
+regions[footer_third]    = Third Bottom
+regions[footer_forth]    = Forth Bottom
