@@ -2,8 +2,10 @@ name = Multipurpose Sub Theme
 description = my subtheme of Zymphonies
 core = 7.x
 base theme = multipurpose_zymphonies_theme
-stylesheets[all][] = style.css
-stylesheets[all][] = my_zymphonies.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/my_zymphonies.css
+stylesheets[all][] = css/animate.css
+scripts[] = js/scripts.js
 
 regions[search]      	 = Search
 regions[user_menu]  	 = User menu

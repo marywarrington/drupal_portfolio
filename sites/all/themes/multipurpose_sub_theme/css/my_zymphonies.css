@@ -24,3 +24,7 @@ a {
 #main-menu li a.active {
   border-bottom: 2px solid #FF6666;
 }
+
+#main-menu li:hover >a {
+  color: #FF6666;
+}
